@@ -40,8 +40,8 @@ const HomeScreen = () => {
 
         {/* Buttons */}
         <View className=" items-center my-3">
-          <Button data="Find" color="bg-accent-blue-extraDark" />
-          <Button data="Ask for Help" color="bg-orange" />
+          <Button title="Find" color="bg-accent-blue-extraDark" to="Find" />
+          <Button title="Ask for Help" color="bg-orange" to="Help" />
         </View>
 
         {/* Gallery */}

@@ -30,7 +30,8 @@ const HomeScreen = () => {
             top: -0.5 * width,
             left: -0.5 * width,
           }}
-        ></View>
+        />
+
         {/* Header */}
         <View className="items-center justify-center mt-8 mb-3">
           <Text className="text-accent-blue-extraDark text-4xl font-extrabold">
@@ -40,14 +41,20 @@ const HomeScreen = () => {
 
         {/* Buttons */}
         <View className=" items-center my-3">
-          <Button title="Find" color="bg-accent-blue-extraDark" to="Find" />
-          <Button title="Ask for Help" color="bg-orange" to="Help" />
+          <Button
+            title="Find"
+            color="bg-accent-blue-extraDark"
+            onpress={() => navigation.navigate(`Find`)}
+          />
+          <Button
+            title="Ask for Help"
+            color="bg-orange"
+            onpress={() => navigation.navigate(`Help`)}
+          />
         </View>
 
-        {/* Gallery */}
         <Gallery />
 
-        {/* Dashboard */}
         <Dashboard />
 
         <Footer />

@@ -1,13 +1,33 @@
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { Dimensions, View } from "react-native";
 import React, { useLayoutEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Find from "../components/Find";
 
 const FindScreen = () => {
   const navigation = useNavigation();
 
+  const width = Dimensions.get("screen").width;
+  const height = Dimensions.get("screen").height;
+
   const [aadhar, setAadhar] = useState("");
   const [phone, setPhone] = useState("");
+
+  const searchByAadhar = () => {
+    navigation.navigate("Found");
+  };
+
+  const searchByPhone = () => {
+    navigation.navigate("Found");
+  };
+
+  const handleAadhar = (newText) => {
+    setAadhar(newText);
+  };
+
+  const handlePhone = (newText) => {
+    setPhone(newText);
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -15,43 +35,32 @@ const FindScreen = () => {
     });
   }, []);
   return (
-    <SafeAreaView>
+    <SafeAreaView className=" bg-white">
+      <View
+        className="bg-accent-blue-dark absolute rotate-45"
+        style={{
+          height,
+          width: (2 * width) / 3,
+          left: 50,
+          top: -75,
+        }}
+      />
+      <View
+        className="bg-accent-blue-mid absolute rotate-45"
+        style={{
+          height: height * 2,
+          width: width / 6,
+          left: 100,
+          top: -150,
+        }}
+      />
       <View className=" justify-center h-full">
-        <View className="items-center my-10 mx-4 py-8 px-3 bg-accent-blue-dark rounded-2xl">
-          <Text className="text-2xl font-semibold text-white m-3">
-            Find by Aadhar number
-          </Text>
-          <TextInput
-            caretHidden={true}
-            className="h-10 w-11/12 text-lg rounded-xl m-3 bg-white text-center"
-            onChangeText={(newText) => setAadhar(newText)}
-            placeholder="Enter Aadhar number"
-          />
-          <TouchableOpacity>
-            <Text className="h-12 w-28 text-center text-xl m-2 p-2 text-accent-blue-extraDark bg-bone rounded-full">
-              Search
-            </Text>
-          </TouchableOpacity>
-          {/* <Text>{aadhar}</Text> */}
-        </View>
-
-        <View className="items-center my-10 mx-4 py-8 px-3 bg-accent-blue-dark rounded-2xl">
-          <Text className="text-2xl font-semibold text-white m-3">
-            Find by Phone number
-          </Text>
-          <TextInput
-            caretHidden={true}
-            className="h-10 w-11/12 text-lg rounded-xl m-3 bg-white text-center"
-            onChangeText={(newText) => setPhone(newText)}
-            placeholder="Enter Aadhar number"
-          />
-          <TouchableOpacity>
-            <Text className="h-12 w-28 text-center text-xl m-2 p-2 text-accent-blue-extraDark bg-bone rounded-full">
-              Search
-            </Text>
-          </TouchableOpacity>
-          {/* <Text>{phone}</Text> */}
-        </View>
+        <Find
+          name="aadhar"
+          searchBy={searchByAadhar}
+          handleText={handleAadhar}
+        />
+        <Find name="phone" searchBy={searchByPhone} handleText={handlePhone} />
       </View>
     </SafeAreaView>
   );

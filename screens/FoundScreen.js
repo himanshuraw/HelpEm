@@ -3,7 +3,7 @@ import React, { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const HelpScreen = () => {
+const FoundScreen = () => {
   const navigation = useNavigation();
 
   useLayoutEffect(() => {
@@ -13,9 +13,9 @@ const HelpScreen = () => {
   }, []);
   return (
     <SafeAreaView>
-      <Text>HelpScreen</Text>
+      <Text>FoundScreen</Text>
     </SafeAreaView>
   );
 };
 
-export default HelpScreen;
+export default FoundScreen;

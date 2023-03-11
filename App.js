@@ -1,5 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import AdminLogin from "./screens/AdminLogin";
 import FindScreen from "./screens/FindScreen";
 import FoundScreen from "./screens/FoundScreen";
 import HelpScreen from "./screens/HelpScreen";
@@ -15,6 +16,7 @@ export default function App() {
         <Stack.Screen name="Find" component={FindScreen} />
         <Stack.Screen name="Help" component={HelpScreen} />
         <Stack.Screen name="Found" component={FoundScreen} />
+        <Stack.Screen name="AdminLogin" component={AdminLogin} />
       </Stack.Navigator>
     </NavigationContainer>
   );

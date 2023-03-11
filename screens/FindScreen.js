@@ -2,7 +2,7 @@ import { Dimensions, View } from "react-native";
 import React, { useLayoutEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Find from "../components/Find";
+import FindCard from "../components/FindCard";
 
 const FindScreen = () => {
   const navigation = useNavigation();
@@ -55,12 +55,16 @@ const FindScreen = () => {
         }}
       />
       <View className=" justify-center h-full">
-        <Find
+        <FindCard
           name="aadhar"
           searchBy={searchByAadhar}
           handleText={handleAadhar}
         />
-        <Find name="phone" searchBy={searchByPhone} handleText={handlePhone} />
+        <FindCard
+          name="phone"
+          searchBy={searchByPhone}
+          handleText={handlePhone}
+        />
       </View>
     </SafeAreaView>
   );

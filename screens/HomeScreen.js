@@ -57,6 +57,14 @@ const HomeScreen = () => {
 
         <Dashboard />
 
+        <View className="items-center mb-10">
+          <Button
+            title="Admin"
+            color="bg-accent-blue-dark"
+            onpress={() => navigation.navigate(`AdminLogin`)}
+          />
+        </View>
+
         <Footer />
       </ScrollView>
     </SafeAreaView>

@@ -13,7 +13,7 @@ const Dashboard = () => {
             Saved
           </Text>
           <Text className="text-lg font-bold text-accent-blue-light">
-            Casualities
+            Casualties
           </Text>
         </View>
         <View className="w-[40%] items-center my-5 py-5 justify-evenly bg-accent-blue-dark">

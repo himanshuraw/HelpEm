@@ -43,7 +43,7 @@ const FoundScreen = () => {
           <Text className="text-accent-blue-extraDark text-lg font-bold mr-3">
             Name :
           </Text>
-          <Text className="text-accent-blue-dark text-lg"> Victim name </Text>
+          <Text className="text-accent-blue-dark text-lg"> Rakesh Rana </Text>
         </View>
         <View className="flex-row mb-3">
           <Text className="text-accent-blue-extraDark text-lg font-bold mr-3">

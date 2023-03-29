@@ -1,9 +1,17 @@
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import Button from "./Button";
+import { useNavigation } from "@react-navigation/native";
 
 const Admin = () => {
   //? CHANGE USESTAES WITH REDUX : DISPATCH
+  const navigation = useNavigation();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: false,
+    });
+  });
 
   const [shelterCount, setShelterCount] = useState();
   const [savedCount, setSavedCount] = useState();
@@ -33,7 +41,7 @@ const Admin = () => {
           <Button
             title="Register Victim"
             color="bg-accent-blue-dark"
-            onpress={() => console.log(`Victim clicked`)}
+            onpress={() => navigation.navigate(`RegisterVictim`)}
           />
         </View>
         <View className="w-1/2 items-center">

@@ -1,7 +1,8 @@
-import { View, Text } from "react-native";
-import React, { useLayoutEffect } from "react";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import React, { useLayoutEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Otp from "./Otp";
 
 const HelpScreen = () => {
   const navigation = useNavigation();
@@ -11,9 +12,34 @@ const HelpScreen = () => {
       headerShown: false,
     });
   }, []);
+
+  const handleSubmit = () => {
+    
+  }
+
+  const [number, setNumber] = useState('');
   return (
     <SafeAreaView>
-      <Text>HelpScreen</Text>
+
+      <View className="w-5/6 self-center bg-accent-blue-mid px-5 py-10">
+        <Text>
+          Phone Number
+        </Text>
+        <TextInput
+        className=" bg-red"
+        placeholder="Enter Phone number"
+        keyboardType="phone-pad"
+        onChangeText= {(newtext) => {
+          setNumber(newtext);
+        }}/>
+
+        <TouchableOpacity className="bg-bone self-center" onPress={handleSubmit}>
+        <Text>
+          Ok
+        </Text>
+      </TouchableOpacity>
+      </View>
+      
     </SafeAreaView>
   );
 };

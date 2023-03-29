@@ -18,7 +18,7 @@ const HomeScreen = () => {
     });
   }, []);
 
-  const isAdmin = false;
+  const isAdmin = 0;
 
   return (
     <SafeAreaView className=" flex-1 bg-white">

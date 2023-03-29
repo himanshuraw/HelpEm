@@ -2,7 +2,6 @@ import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import React, { useLayoutEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Otp from "./Otp";
 
 const HelpScreen = () => {
   const navigation = useNavigation();

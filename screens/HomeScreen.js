@@ -7,6 +7,7 @@ import Button from "../components/Button";
 import Dashboard from "../components/Dashboard";
 import Footer from "../components/Footer";
 import Admin from "../components/Admin";
+import * as Location from 'expo-location';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -17,6 +18,17 @@ const HomeScreen = () => {
       headerShown: false,
     });
   }, []);
+
+  const helpClicked = async () =>{
+    //! Send Location if send then ok else show error
+    let {status} = await Location.requestForegroundPermissionsAsync();
+    if(status !== 'granted'){
+      console.log("permision not granter")
+    }
+    let location = await Location.getCurrentPositionAsync({});
+    console.log(location);
+    navigation.navigate(`Help`);
+  }
 
   const isAdmin = 0;
 
@@ -53,7 +65,7 @@ const HomeScreen = () => {
               <Button
                 title="Ask for Help"
                 color="bg-orange"
-                onpress={() => navigation.navigate(`Help`)}
+                onpress={helpClicked}
               />
             </View>
 

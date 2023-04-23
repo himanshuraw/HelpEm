@@ -10,7 +10,7 @@ import Button from '../components/Button';
 import { useNavigation } from '@react-navigation/native';
 import Dashboard from '../components/Dashboard';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { AuthContext } from '../context/AuthContext';
+import { AppContext } from '../context/AppContext';
 
 const AdminScreen = () => {
 	//? CHANGE USESTAES WITH REDUX : DISPATCH
@@ -42,7 +42,7 @@ const AdminScreen = () => {
 		console.log({ shelterCount, savedCount, casualtiesCount });
 	};
 
-	const { logout } = useContext(AuthContext);
+	const { logout } = useContext(AppContext);
 
 	return (
 		<SafeAreaView>

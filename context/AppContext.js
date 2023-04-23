@@ -3,12 +3,14 @@ import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
 import { BASE_URL } from '../config';
 
-export const AuthContext = createContext();
+export const AppContext = createContext();
 
-export const AuthProvider = ({ children }) => {
+export const AppProvider = ({ children }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [userToken, setUserToken] = useState(null);
 	const [userInfo, setUserInfo] = useState(null);
+
+	const [victimFound, setVictimFound] = useState(null);
 
 	const login = (name, password) => {
 		setIsLoading(true);
@@ -60,13 +62,19 @@ export const AuthProvider = ({ children }) => {
 		}
 	};
 
+	const putVictim = (data) => {
+		setVictimFound(data);
+	};
+
 	useEffect(() => {
 		isLoggedIn();
 	}, []);
 
 	return (
-		<AuthContext.Provider value={{ login, logout, isLoading, userToken }}>
+		<AppContext.Provider
+			value={{ login, logout, isLoading, userToken, putVictim, victimFound }}
+		>
 			{children}
-		</AuthContext.Provider>
+		</AppContext.Provider>
 	);
 };

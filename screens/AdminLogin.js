@@ -8,7 +8,7 @@ import {
 import React, { useContext, useLayoutEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { AuthContext } from '../context/AuthContext';
+import { AppContext } from '../context/AppContext';
 
 const AdminLogin = () => {
 	const navigation = useNavigation();
@@ -25,15 +25,7 @@ const AdminLogin = () => {
 	const [name, setName] = useState('');
 	const [password, setPassword] = useState('');
 
-	const { login } = useContext(AuthContext);
-
-	const submit = () => {
-		//an http request to server for authentication
-		//if auth -- isAdmin : true , -> HomeScreen
-		//else unAuthenticated
-
-		navigation.navigate(`Home`);
-	};
+	const { login } = useContext(AppContext);
 
 	return (
 		<>

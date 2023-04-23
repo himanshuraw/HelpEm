@@ -3,11 +3,11 @@ import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import UserStack from './UserStack';
 import AdminStack from './AdminStack';
-import { AuthContext } from '../context/AuthContext';
+import { AppContext } from '../context/AppContext';
 import { ActivityIndicator, View } from 'react-native';
 
 const AppNav = () => {
-	const { isLoading, userToken } = useContext(AuthContext);
+	const { isLoading, userToken } = useContext(AppContext);
 
 	if (isLoading) {
 		return (

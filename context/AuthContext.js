@@ -45,13 +45,13 @@ export const AuthProvider = ({ children }) => {
 	const isLoggedIn = async () => {
 		try {
 			setIsLoading(true);
-			let userInfo = await AsyncStorage.getItem('userToken');
+			let userInfo = await AsyncStorage.getItem('userInfo');
 			let userToken = await AsyncStorage.getItem('userToken');
 			userInfo = JSON.parse(userInfo);
 
 			if (userInfo) {
 				setUserToken(userToken);
-				setUserToken(userInfo);
+				setUserInfo(userInfo);
 			}
 
 			setIsLoading(false);

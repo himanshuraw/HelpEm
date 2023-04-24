@@ -126,6 +126,12 @@ const AdminScreen = () => {
 
 				<View className='items-center justify-center mb-6 mx-4'>
 					<Button
+						title='Requests'
+						color='bg-accent-blue-dark'
+						onpress={() => navigation.navigate(`HelpReq`)}
+						height='h-14'
+					/>
+					<Button
 						title='Logout'
 						color='bg-accent-blue-dark'
 						onpress={logout}

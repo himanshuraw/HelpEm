@@ -1,4 +1,4 @@
-import { Dimensions, ScrollView, Text, View } from 'react-native';
+import { Dimensions, ScrollView, Text, ToastAndroid, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import React, { useContext, useLayoutEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -22,11 +22,15 @@ const HomeScreen = () => {
 		//! Send Location if send then ok else show error
 		let { status } = await Location.requestForegroundPermissionsAsync();
 		if (status !== 'granted') {
-			console.log('permision not granter');
+			ToastAndroid.show('Permission not granted');
 		}
 		let location = await Location.getCurrentPositionAsync({});
+		ToastAndroid.showWithGravity(
+			'Help arriving soon',
+			ToastAndroid.LONG,
+			ToastAndroid.CENTER
+		);
 		console.log(location);
-		navigation.navigate(`Help`);
 	};
 
 	return (

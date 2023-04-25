@@ -7,6 +7,9 @@ import Button from '../components/Button';
 import Dashboard from '../components/Dashboard';
 import Footer from '../components/Footer';
 import * as Location from 'expo-location';
+import * as Application from 'expo-application';
+import axios from 'axios';
+import { BASE_URL } from '../config';
 
 const HomeScreen = () => {
 	const navigation = useNavigation();
@@ -22,15 +25,40 @@ const HomeScreen = () => {
 		//! Send Location if send then ok else show error
 		let { status } = await Location.requestForegroundPermissionsAsync();
 		if (status !== 'granted') {
-			ToastAndroid.show('Permission not granted');
+			return ToastAndroid.show('Permission not granted');
 		}
+
 		let location = await Location.getCurrentPositionAsync({});
-		ToastAndroid.showWithGravity(
-			'Help arriving soon',
-			ToastAndroid.LONG,
-			ToastAndroid.CENTER
-		);
-		console.log(location);
+		if (location === null) {
+			return ToastAndroid.show('Error occured : Not able to get location');
+		}
+
+		let uniqueId = Application.androidId;
+		let data = {
+			uniqueId: uniqueId,
+			latitude: location.coords.latitude,
+			longitude: location.coords.longitude,
+		};
+		console.log(data);
+
+		axios.post(`${BASE_URL}/request`, data).then((res) => {
+			const { success, message } = res.data;
+			if (!success) {
+				return ToastAndroid.showWithGravity(
+					`${message}, Please try again`,
+					ToastAndroid.LONG,
+					ToastAndroid.CENTER
+				);
+			}
+
+			return ToastAndroid.showWithGravity(
+				`${message}, Help arriving soon`,
+				ToastAndroid.LONG,
+				ToastAndroid.CENTER
+			);
+		});
+
+		// console.log(location);
 	};
 
 	return (

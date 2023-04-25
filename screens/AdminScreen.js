@@ -4,6 +4,7 @@ import {
 	TextInput,
 	TouchableOpacity,
 	ScrollView,
+	Dimensions,
 } from 'react-native';
 import React, { useContext, useLayoutEffect, useState } from 'react';
 import Button from '../components/Button';
@@ -15,6 +16,8 @@ import { AppContext } from '../context/AppContext';
 const AdminScreen = () => {
 	//? CHANGE USESTAES WITH REDUX : DISPATCH
 	const navigation = useNavigation();
+	const width = Dimensions.get('screen').width;
+	const height = Dimensions.get('screen').height;
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
@@ -46,8 +49,26 @@ const AdminScreen = () => {
 
 	return (
 		<SafeAreaView>
-			<ScrollView>
-				<View className='flex flex-row items-center justify-center mt-5 mx-4 py-4 rounded-lg border-4 border-accent-blue-extraDark'>
+			<ScrollView className='bg-white'>
+				<View
+					className='bg-accent-blue-dark absolute rotate-45'
+					style={{
+						height,
+						width: (2 * width) / 3,
+						left: 50,
+						top: -75,
+					}}
+				/>
+				<View
+					className='bg-accent-blue-mid absolute rotate-45'
+					style={{
+						height: height * 2,
+						width: width / 6,
+						left: 100,
+						top: -150,
+					}}
+				/>
+				<View className='flex flex-row items-center justify-center mt-5 mx-4 py-4 rounded-lg border-4 border-accent-blue-extraDark bg-white'>
 					<Text className='font-bold text-4xl text-accent-blue-extraDark'>
 						A D M I N
 					</Text>
@@ -69,7 +90,7 @@ const AdminScreen = () => {
 					<View className='w-1/2 items-center'>
 						<Button
 							title='Register Admin'
-							color='bg-accent-blue-dark'
+							color='bg-accent-blue-extraDark'
 							onpress={() => console.log(`Admin clicked`)}
 							height='h-16'
 						/>
@@ -133,7 +154,7 @@ const AdminScreen = () => {
 					/>
 					<Button
 						title='Logout'
-						color='bg-accent-blue-dark'
+						color='bg-orange'
 						onpress={logout}
 						height='h-14'
 					/>

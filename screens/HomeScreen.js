@@ -1,6 +1,6 @@
 import { Dimensions, ScrollView, Text, ToastAndroid, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import React, { useContext, useLayoutEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Gallery from '../components/Gallery';
 import Button from '../components/Button';
@@ -8,8 +8,10 @@ import Dashboard from '../components/Dashboard';
 import Footer from '../components/Footer';
 import * as Location from 'expo-location';
 import * as Application from 'expo-application';
-import axios from 'axios';
-import { BASE_URL } from '../config';
+import { SOCKET_URL } from '../config';
+import io from 'socket.io-client';
+
+const socket = io.connect(SOCKET_URL);
 
 const HomeScreen = () => {
 	const navigation = useNavigation();
@@ -20,6 +22,26 @@ const HomeScreen = () => {
 			headerShown: false,
 		});
 	}, []);
+
+	//To see response if request was sent or not
+	useEffect(() => {
+		socket.on('callback', (data) => {
+			const { success, message } = data;
+			if (!success) {
+				return ToastAndroid.showWithGravity(
+					`${message}, Please try again`,
+					ToastAndroid.LONG,
+					ToastAndroid.CENTER
+				);
+			}
+
+			return ToastAndroid.showWithGravity(
+				`${message}, Help arriving soon`,
+				ToastAndroid.LONG,
+				ToastAndroid.CENTER
+			);
+		});
+	}, [socket]);
 
 	const helpClicked = async () => {
 		//! Send Location if send then ok else show error
@@ -41,24 +63,7 @@ const HomeScreen = () => {
 		};
 		console.log(data);
 
-		axios.post(`${BASE_URL}/request`, data).then((res) => {
-			const { success, message } = res.data;
-			if (!success) {
-				return ToastAndroid.showWithGravity(
-					`${message}, Please try again`,
-					ToastAndroid.LONG,
-					ToastAndroid.CENTER
-				);
-			}
-
-			return ToastAndroid.showWithGravity(
-				`${message}, Help arriving soon`,
-				ToastAndroid.LONG,
-				ToastAndroid.CENTER
-			);
-		});
-
-		// console.log(location);
+		socket.emit('send_request', data);
 	};
 
 	return (

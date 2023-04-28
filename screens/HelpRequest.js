@@ -54,7 +54,7 @@ const HelpRequest = () => {
 	return (
 		<SafeAreaView>
 			<ScrollView>
-				<View className='bg-accent-blue-extraDark rounded-b-3xl mx-2'>
+				<View className='bg-accent-blue-dark rounded-b-3xl mx-2'>
 					<Text className='text-center mt-8 text-3xl font-bold text-white'>
 						Help Requests
 					</Text>

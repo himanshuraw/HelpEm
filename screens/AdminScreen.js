@@ -81,9 +81,9 @@ const AdminScreen = () => {
 				<View className='flex-row'>
 					<View className='w-1/2 items-center'>
 						<Button
-							title='Register Victim'
+							title='Victim'
 							color='bg-accent-blue-dark'
-							onpress={() => navigation.navigate(`RegisterVictim`)}
+							onpress={() => navigation.navigate(`Victim`)}
 							height='h-16'
 						/>
 					</View>
@@ -91,7 +91,7 @@ const AdminScreen = () => {
 						<Button
 							title='Register Admin'
 							color='bg-accent-blue-extraDark'
-							onpress={() => console.log(`Admin clicked`)}
+							onpress={() => navigation.navigate(`RegisterAdmin`)}
 							height='h-16'
 						/>
 					</View>

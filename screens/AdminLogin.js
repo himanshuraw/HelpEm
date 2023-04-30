@@ -49,7 +49,7 @@ const AdminLogin = () => {
 				<View className='w-5/6 px-6 py-10 shadow-xl shadow-accent-blue-extraDark bg-white rounded-md'>
 					<View>
 						<Text className='text-xl font-medium text-accent-blue-extraDark mb-5'>
-							Name
+							Username
 						</Text>
 						<TextInput
 							placeholder='Enter name..'

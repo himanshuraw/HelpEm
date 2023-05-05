@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
 import { BASE_URL } from '../config';
+import { ToastAndroid } from 'react-native';
 
 export const AppContext = createContext();
 
@@ -31,7 +32,7 @@ export const AppProvider = ({ children }) => {
 				console.log(userInfo.token);
 			})
 			.catch((e) => {
-				console.log(`login : ${e}`);
+				ToastAndroid.show('Incorrect username or password', ToastAndroid.LONG);
 			});
 		setIsLoading(false);
 	};

@@ -54,7 +54,7 @@ const AdminLogin = () => {
 						<TextInput
 							placeholder='Enter name..'
 							onChangeText={(newText) => {
-								setName(newText);
+								setName(newText.trim());
 							}}
 							className='h-9 w-full mb-5 px-3 text-md rounded-sm border-[1px] border-accent-blue-extraDark'
 						/>
@@ -66,7 +66,7 @@ const AdminLogin = () => {
 						<TextInput
 							placeholder='Enter password..'
 							onChangeText={(newText) => {
-								setPassword(newText);
+								setPassword(newText.trim());
 							}}
 							className='h-9 w-full mb-5 px-3 text-md rounded-sm border-[1px] border-accent-blue-extraDark'
 						/>

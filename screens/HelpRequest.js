@@ -1,16 +1,15 @@
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import React, { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { io } from 'socket.io-client';
-import { BASE_URL, SOCKET_URL } from '../config';
+import { BASE_URL } from '../config';
 import Button from '../components/Button';
 import axios from 'axios';
 import { AppContext } from '../context/AppContext';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AntDesign } from '@expo/vector-icons';
-import Hr from '../components/Hr';
 
-const socket = io.connect(SOCKET_URL);
+const socket = io.connect(BASE_URL);
 
 const HelpRequest = () => {
 	const { userToken } = useContext(AppContext);

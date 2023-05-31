@@ -8,10 +8,10 @@ import Dashboard from '../components/Dashboard';
 import Footer from '../components/Footer';
 import * as Location from 'expo-location';
 import * as Application from 'expo-application';
-import { SOCKET_URL } from '../config';
+import { BASE_URL } from '../config';
 import io from 'socket.io-client';
 
-const socket = io.connect(SOCKET_URL);
+const socket = io.connect(BASE_URL);
 
 const HomeScreen = () => {
 	const navigation = useNavigation();

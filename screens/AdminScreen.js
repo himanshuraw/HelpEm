@@ -5,19 +5,27 @@ import {
 	TouchableOpacity,
 	ScrollView,
 	Dimensions,
+	ToastAndroid,
 } from 'react-native';
-import React, { useContext, useLayoutEffect, useState } from 'react';
+import React, { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import Button from '../components/Button';
 import { useNavigation } from '@react-navigation/native';
 import Dashboard from '../components/Dashboard';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppContext } from '../context/AppContext';
+import axios from 'axios';
+import { BASE_URL } from '../config';
 
 const AdminScreen = () => {
 	//? CHANGE USESTAES WITH REDUX : DISPATCH
 	const navigation = useNavigation();
 	const width = Dimensions.get('screen').width;
 	const height = Dimensions.get('screen').height;
+
+	const { userToken } = useContext(AppContext);
+	let config = {
+		headers: { Authorization: userToken },
+	};
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
@@ -26,23 +34,53 @@ const AdminScreen = () => {
 	});
 
 	const [shelterCount, setShelterCount] = useState();
-	const [savedCount, setSavedCount] = useState();
 	const [casualtiesCount, SetCasualtiesCount] = useState();
 
-	const handleShelter = (count) => {
-		setShelterCount(count);
+	const updateShelter = () => {
+		let data = { count: shelterCount };
+		axios
+			.post(`${BASE_URL}/admin/count/shelter`, data, config)
+			.then((res) => {
+				let { success, payload } = res.data;
+				success
+					? ToastAndroid.show('Updated successfully', ToastAndroid.LONG)
+					: ToastAndroid.show('Please try again', ToastAndroid.LONG);
+			})
+			.catch((err) => {
+				console.log(err);
+				ToastAndroid.show(
+					'Server error while processing request',
+					ToastAndroid.LONG
+				);
+			});
 	};
 
-	const handleSaved = (count) => {
-		setSavedCount(count);
+	const updateCasualty = () => {
+		let data = { count: casualtiesCount };
+		axios
+			.post(`${BASE_URL}/admin/count/casualty`, data, config)
+			.then((res) => {
+				let { success, payload } = res.data;
+				success
+					? ToastAndroid.show('Updated successfully', ToastAndroid.LONG)
+					: ToastAndroid.show('Please try again', ToastAndroid.LONG);
+			})
+			.catch((err) => {
+				console.log(err);
+				ToastAndroid.show(
+					'Server error while processing request',
+					ToastAndroid.LONG
+				);
+			});
+	};
+
+	const handleShelter = (count) => {
+		console.log(count);
+		setShelterCount(count);
 	};
 
 	const handleCasualty = (count) => {
 		SetCasualtiesCount(count);
-	};
-
-	const updateValues = () => {
-		console.log({ shelterCount, savedCount, casualtiesCount });
 	};
 
 	const { logout } = useContext(AppContext);
@@ -98,51 +136,44 @@ const AdminScreen = () => {
 				</View>
 
 				{/* Set Counts */}
-				<View className=' w-80 self-center my-10 px-4 h-96 items-center justify-evenly rounded-md bg-white shadow-xl shadow-accent-blue-extraDark'>
-					<View className='flex-row'>
-						<View className=' h-10 w-1/3 justify-center items-cente'>
-							<Text className='text-lg'>Shelter</Text>
+				<View className='gap-4 my-4 mx-2'>
+					{/*  */}
+					<View className='bg-white shadow-md shadow-accent-blue-extraDark mx-3 rounded-lg'>
+						<View className='flex-row py-3 px-5  gap-3 items-center'>
+							<Text className='py-3 font-bold text-lg w-1/4'>Shelter</Text>
+							<TextInput
+								className='bg-white rounded-md border border-accent-blue-extraDark grow px-4'
+								onChangeText={handleShelter}
+								keyboardType='number-pad'
+							/>
+
+							<TouchableOpacity
+								onPress={updateShelter}
+								className='bg-accent-blue-dark rounded-md px-3 py-2 items-center '
+							>
+								<Text className='text-white font-bold'>Update</Text>
+							</TouchableOpacity>
 						</View>
-						<TextInput
-							keyboardType='phone-pad'
-							caretHidden={true}
-							className='h-10 w-7/12 px-3 text-md rounded-sm border-[1px] border-accent-blue-extraDark'
-							onChangeText={handleShelter}
-							placeholder={`Enter Selter Count`}
-						/>
 					</View>
 
-					<View className='flex-row'>
-						<View className=' h-10 w-1/3 justify-center items-cente'>
-							<Text className='text-lg'>Saved</Text>
-						</View>
-						<TextInput
-							keyboardType='phone-pad'
-							caretHidden={true}
-							className='h-10 w-7/12 px-3 text-md rounded-sm border-[1px] border-accent-blue-extraDark'
-							onChangeText={handleSaved}
-							placeholder={`Enter Saved Count`}
-						/>
-					</View>
+					{/*  */}
+					<View className='bg-white shadow-md shadow-accent-blue-extraDark mx-3 rounded-lg'>
+						<View className='flex-row py-3 px-5  gap-3 items-center'>
+							<Text className='py-3 font-bold text-lg w-1/4'>Casualty</Text>
+							<TextInput
+								className='bg-white rounded-md border border-accent-blue-extraDark grow px-4'
+								onChangeText={handleCasualty}
+								keyboardType='number-pad'
+							/>
 
-					<View className='flex-row'>
-						<View className=' h-10 w-1/3 justify-center items-cente'>
-							<Text className='text-lg'>Casualty</Text>
+							<TouchableOpacity
+								onPress={updateCasualty}
+								className='bg-accent-blue-dark rounded-md px-3 py-2 items-center '
+							>
+								<Text className='text-white font-bold'>Update</Text>
+							</TouchableOpacity>
 						</View>
-						<TextInput
-							keyboardType='phone-pad'
-							caretHidden={true}
-							className='h-10 w-7/12 px-3 text-md rounded-sm border-[1px] border-accent-blue-extraDark'
-							onChangeText={handleCasualty}
-							placeholder={`Enter Casualties`}
-						/>
 					</View>
-					<TouchableOpacity
-						className='bg-accent-blue-dark py-3 px-9 rounded-full'
-						onPress={updateValues}
-					>
-						<Text className='text-lg font-bold text-white '>Done</Text>
-					</TouchableOpacity>
 				</View>
 
 				<View className='items-center justify-center mb-6 mx-4'>

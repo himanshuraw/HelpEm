@@ -1,4 +1,4 @@
-import { Dimensions, View } from 'react-native';
+import { Dimensions, ToastAndroid, View } from 'react-native';
 import React, { useContext, useLayoutEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -30,7 +30,7 @@ const FindScreen = () => {
 				navigation.navigate('Found');
 			})
 			.catch((e) => {
-				console.log(`aadhar ${e}`);
+				ToastAndroid.show('No match found', ToastAndroid.LONG);
 			});
 	};
 
@@ -46,7 +46,7 @@ const FindScreen = () => {
 				navigation.navigate('Found');
 			})
 			.catch((e) => {
-				console.log(`phone ${e}`);
+				ToastAndroid.show('No match found', ToastAndroid.LONG);
 			});
 	};
 
